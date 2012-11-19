@@ -24,4 +24,4 @@ exports.sub = (function (a, b) {
   _$jscoverage['operator.js'][11]++;
   return a - b;
 });
-_$jscoverage['operator.js'].source = ["if ('undefined' === typeof exports) {","\texports = {};","}","","","exports.sum = function(a, b) {","\treturn a+b;","}","","exports.sub = function(a, b) {","\treturn a-b;","}"];
+_$jscoverage['operator.js'].source = ["if ('undefined' === typeof exports) {","\texports = {};","}","","","exports.sum = function(a, b) {","\treturn a+b;","}","","exports.sub = function(a, b) {","\treturn a-b;","}",""];

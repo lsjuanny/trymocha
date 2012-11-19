@@ -5,6 +5,7 @@ if ('undefined' != typeof require) {
   var libpath = process.env['YOUR_LIBRARY_NAME_COV'] ? '../lib-cov' : '../lib';
   var operator = require(libpath + '/operator');
   var alg = require(libpath + '/algorithm');
+  var myHttp = require(libpath + '/myHttp');
 }
 
 describe('Operator', function(){
@@ -13,10 +14,24 @@ describe('Operator', function(){
       expect(operator.sum(1,2)).to.equal(3);
       expect(operator.sum(3,9)).to.equal(12);
     })
-    
+
     it('should return the correct summary when have negative', function(){
       expect(operator.sum(1,-2)).to.equal(-1);
       expect(operator.sum(-4,9)).to.equal(5);
     })
   })
 })
+
+//// asynchronous test
+describe('Http', function() {
+  describe('#get', function() {
+    it('should return 200 success code', function(done) {
+      myHttp.get('http://www.yahoo.com', function(response) {
+        expect(response.statusCode).to.equal(200);
+        //// include 'done' in async callback to finish the test
+        done();
+      });
+    });
+  });
+});
+
