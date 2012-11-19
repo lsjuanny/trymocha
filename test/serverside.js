@@ -8,7 +8,7 @@ describe('Array', function(){
       expect([1,2,3].indexOf(5)).to.equal(-1);
       expect([1,2,3].indexOf(0)).to.equal(-1);
     })
-    
+
     it('should return the correct index when the value is present', function(){
       expect([1,2,3].indexOf(1)).to.equal(0);
       expect([1,2,3].indexOf(2)).to.equal(1);
@@ -36,3 +36,16 @@ context('Array', function(){
     expect(this.arr.length).to.equal(3);
   })
 })
+
+//// asynchronous test
+describe('Http', function() {
+  describe('#get', function() {
+    it('should return 200 success code', function(done) {
+      require('http').get('http://www.yahoo.com', function(response) {
+        expect(response.statusCode).to.equal(200);
+        //// include 'done' in async callback to finish the test
+        done();
+      });
+    });
+  });
+});
