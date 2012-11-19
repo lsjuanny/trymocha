@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Tests Mixed</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/mocha/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="/mocha/mocha.js"></script>
+    <script src="/chai/chai.js"></script>
+    <script src="/algorithm.js"></script>
+    <script src="/operator.js"></script>
+    <script>
+      mocha.ui('tdd');
+      mocha.reporter('html');
+      expect = chai.expect;
+      operator = alg = exports;
+    </script>
+    <script src="/tddtest.js"></script>
+    <script src="/subtest.js"></script>
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {
+        mocha.run();
+      }
+    </script>
+  </body>
+</html>

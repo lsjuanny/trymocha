@@ -1,0 +1,54 @@
+
+{
+  "instrumentation": "node-jscoverage",
+  "sloc": 0,
+  "hits": 0,
+  "misses": 0,
+  "coverage": 0,
+  "files": [],
+  "stats": {
+    "suites": 4,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2012-11-14T10:39:08.094Z",
+    "end": "2012-11-14T10:39:08.107Z",
+    "duration": 13
+  },
+  "tests": [
+    {
+      "title": "should return -1 when not present",
+      "fullTitle": "Array #indexOf() should return -1 when not present",
+      "duration": 1
+    },
+    {
+      "title": "should return corresponding index when present",
+      "fullTitle": "Array #indexOf() should return corresponding index when present",
+      "duration": 1
+    },
+    {
+      "title": "should reverse the input array",
+      "fullTitle": "Algorithm Reverse() should reverse the input array",
+      "duration": 1
+    }
+  ],
+  "failures": [],
+  "passes": [
+    {
+      "title": "should return -1 when not present",
+      "fullTitle": "Array #indexOf() should return -1 when not present",
+      "duration": 1
+    },
+    {
+      "title": "should return corresponding index when present",
+      "fullTitle": "Array #indexOf() should return corresponding index when present",
+      "duration": 1
+    },
+    {
+      "title": "should reverse the input array",
+      "fullTitle": "Algorithm Reverse() should reverse the input array",
+      "duration": 1
+    }
+  ]
+}
