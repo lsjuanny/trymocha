@@ -5,12 +5,25 @@ if (! _$jscoverage['myHttp.js']) {
   _$jscoverage['myHttp.js'][1] = 0;
   _$jscoverage['myHttp.js'][3] = 0;
   _$jscoverage['myHttp.js'][4] = 0;
+  _$jscoverage['myHttp.js'][7] = 0;
+  _$jscoverage['myHttp.js'][8] = 0;
+  _$jscoverage['myHttp.js'][9] = 0;
 }
 _$jscoverage['myHttp.js'][1]++;
 var http = require("http");
 _$jscoverage['myHttp.js'][3]++;
-exports.get = (function (url, callback) {
+exports.get = (function (url, callback, done) {
   _$jscoverage['myHttp.js'][4]++;
-  return http.get(url, callback);
+  return http.get(url, (function (response) {
+  _$jscoverage['myHttp.js'][4]++;
+  callback(response, done);
+}));
 });
-_$jscoverage['myHttp.js'].source = ["var http = require('http');","","exports.get = function(url, callback) {","  return http.get(url, callback);","};"];
+_$jscoverage['myHttp.js'][7]++;
+exports.callback = (function (response, done) {
+  _$jscoverage['myHttp.js'][8]++;
+  console.assert(response.statusCode === 200);
+  _$jscoverage['myHttp.js'][9]++;
+  done();
+});
+_$jscoverage['myHttp.js'].source = ["var http = require('http');","","exports.get = function(url, callback, done) {","  return http.get(url, function(response) {callback(response, done)});","};","","exports.callback = function(response, done) {","        console.assert(response.statusCode === 200);","        done();","      };"];

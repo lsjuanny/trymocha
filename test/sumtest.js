@@ -26,11 +26,7 @@ describe('Operator', function(){
 describe('Http', function() {
   describe('#get', function() {
     it('should return 200 success code', function(done) {
-      myHttp.get('http://www.yahoo.com', function(response) {
-        expect(response.statusCode).to.equal(200);
-        //// include 'done' in async callback to finish the test
-        done();
-      });
+      myHttp.get('http://www.yahoo.com', myHttp.callback, done);
     });
   });
 });
