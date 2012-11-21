@@ -1,7 +1,7 @@
 REPORTER ?= list
 
 start-server:
-	@node app &
+	@node  app &
 
 clean:
 	@kill -9 `ps -ef|grep "node app"|grep -v grep | awk '{print $2}'` &
