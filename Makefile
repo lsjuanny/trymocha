@@ -1,54 +1,37 @@
-REPORTER ?= list
+BIN = ./node_modules/.bin
 
-start-server:
-	@node  app &
 
-clean:
-	@kill -9 `ps -ef|grep "node app"|grep -v grep | awk '{print $2}'` &
+start-server: stop-server
+	PORT=4080 node app &
 
-config:
-	@alias buster=./node_modules/buster/bin/buster
-	@alias grepjs='grep -Rin --color=always --include=\*.js'
+stop-server:
+	-kill -9 `ps -ef|grep "node app"|grep -v grep | awk '{print $$2}'`
+
+instr: clean-coverage
+	$(BIN)/istanbul instrument --output lib-cov --no-compact --variable global.__coverage__ lib
 	
 test-server:
-	@./node_modules/mocha/bin/mocha \
-		--reporter ${REPORTER} \
-		test/serverside.js test/sumtest.js
+	YOUR_LIBRARY_NAME_COV=1 \
+	$(BIN)/mocha \
+	-R xunit-istanbul \
+	test/*-server-test.js \
+	test/*-common-test.js | \
+	node genReportFiles.js \
+	-p server
 test-client:
-	@./node_modules/mocha-phantomjs/bin/mocha-phantomjs \
-		-R ${REPORTER} \
-		http://localhost:3000/test
-coverage:
 	YOUR_LIBRARY_NAME_COV=1 \
-	./node_modules/mocha/bin/mocha \
-	-R html-cov \
-	test/serverside.js \
-	test/sumtest.js \
-	> coverage.html
-coverage-client:
-	YOUR_LIBRARY_NAME_COV=1 \
-	../mocha-phantomjs/bin/mocha-phantomjs \
-	-R json-cov \
-	http://localhost:3000/test | \
-	node buildHTML.js \
-	> coverage1.html
+	$(BIN)/mocha-phantomjs \
+	-R xunit-istanbul \
+	http://localhost:4080/test | \
+	node genReportFiles.js \
+	-p client
 
+test: clean instr start-server test-server test-client
+	node genLcovReport.js
 
-test-tour:
-	./node_modules/mocha/bin/mocha \
-	-R list \
-	test/operator-test.js
+clean-coverage:
+	-rm -rf lib-cov
 
-test-tour-cov:
-	jscoverage lib-tour lib-tour-cov
-	YOUR_LIBRARY_NAME_COV=1 \
-	./node_modules/mocha/bin/mocha \
-	-R html-cov \
-	test/factorial-test.js \
-	> tour-coverage.html
-	rm -Rf lib-tour-cov
-
-test-tour-ex:
-	./node_modules/mocha/bin/mocha \
-	-R list \
-	test/operator-ex-test.js
+clean:
+	-rm -rf lib-cov
+	-rm -rf report

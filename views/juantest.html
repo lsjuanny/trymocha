@@ -8,16 +8,16 @@
     <div id="mocha"></div>
     <script src="/mocha/mocha.js"></script>
     <script src="/chai/chai.js"></script>
-    <script src="/algorithm.js"></script>
-    <script src="/operator.js"></script>
+    <script src="/operator-client.js"></script>
+    <script src="/operator-common.js"></script>
     <script>
       mocha.ui('tdd');
       mocha.reporter('html');
       expect = chai.expect;
       operator = alg = exports;
     </script>
-    <script src="/tddtest.js"></script>
-    <script src="/subtest.js"></script>
+    <script src="/operator-client-test.js"></script>
+    <script src="/operator-common-test.js"></script>
     <script>
       if (window.mochaPhantomJS) {
         mochaPhantomJS.run();
